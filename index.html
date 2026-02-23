@@ -9,20 +9,15 @@
       text-align: center;
       background: linear-gradient(#111, #222);
       color: white;
-      margin: 0;
       padding: 20px;
       overflow-x: hidden;
     }
-
-    /* Header */
     h1 {
       color: #FFD700;
       text-shadow: 2px 2px #000;
       font-size: 36px;
       margin-bottom: 20px;
     }
-
-    /* Miner buttons */
     .miner-btn {
       background: #FFD700;
       color: #111;
@@ -41,11 +36,7 @@
       margin-right: 8px;
     }
     .miner-btn:hover { background: #FFA500; color: white; }
-
-    /* Status */
     .status { font-size: 20px; margin-top: 15px; }
-
-    /* Character animation */
     .character {
       width: 50px;
       height: 50px;
@@ -59,12 +50,10 @@
       z-index: 10;
     }
     @keyframes pick {
-      0% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, -20px); }
-      100% { transform: translate(-50%, 0); }
+      0% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,-20px); }
+      100% { transform: translate(-50%,0); }
     }
-
-    /* Spark animation */
     .spark {
       width: 10px;
       height: 10px;
@@ -90,15 +79,12 @@
 <button class="miner-btn" onclick="buyMiner('Diamond',5)">
   <img src="https://i.imgur.com/6cP7f6y.png" alt="Diamond"> Diamond – 5 WLD
 </button>
-
 <button class="miner-btn" onclick="buyMiner('Ruby',10)">
   <img src="https://i.imgur.com/1VdE4ZP.png" alt="Ruby"> Ruby – 10 WLD
 </button>
-
 <button class="miner-btn" onclick="buyMiner('Emerald',15)">
   <img src="https://i.imgur.com/3R5k7Iz.png" alt="Emerald"> Emerald – 15 WLD
 </button>
-
 <button class="miner-btn" onclick="buyMiner('Opal',20)">
   <img src="https://i.imgur.com/2tZ8xF0.png" alt="Opal"> Opal – 20 WLD
 </button>
@@ -115,42 +101,41 @@
 <script>
 let miner = "None";
 let gems = 0;
-const miningPower = { Diamond: 25, Ruby: 10, Emerald: 40, Opal: 60 };
+const miningPower = { Diamond:25, Ruby:10, Emerald:40, Opal:60 };
 
-function buyMiner(name, cost){
+function buyMiner(name,cost){
   miner = name;
   document.getElementById("miner").innerText = name;
-  alert("You bought " + name + " miner for " + cost + " WLD");
+  alert("You bought "+name+" miner for "+cost+" WLD");
 }
 
 function mine(){
-  if(miner === "None"){
+  if(miner==="None"){
     alert("Buy a miner first!");
     return;
   }
-
   gems += miningPower[miner];
   document.getElementById("gems").innerText = gems;
 
-  // show character
+  // Show character animation
   const char = document.getElementById("character");
   char.style.display = "block";
   char.style.animation = "pick 1s linear forwards";
 
-  // create multiple sparks
+  // Sparks
   for(let i=0;i<5;i++){
     const spark = document.createElement("div");
     spark.className = "spark";
-    spark.style.left = (50 + Math.random()*20 - 10) + "%";
+    spark.style.left = (50 + Math.random()*20-10)+"%";
     spark.style.bottom = "60px";
     document.body.appendChild(spark);
     spark.style.display = "block";
     spark.style.animation = "spark 0.5s linear forwards";
-    setTimeout(()=> spark.remove(), 500);
+    setTimeout(()=> spark.remove(),500);
   }
 
-  // hide character after animation
-  setTimeout(()=> char.style.display = "none", 1000);
+  // Hide character
+  setTimeout(()=> char.style.display="none",1000);
 }
 </script>
 
