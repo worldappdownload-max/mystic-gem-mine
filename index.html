@@ -1,72 +1,70 @@
-‎<!DOCTYPE html>
-‎<html>
-‎<head>
-‎  <title>Mystic Gem Mine</title>
-‎</head>
-‎<body style="font-family:Arial; text-align:center; background:#111; color:white;">
-‎
-‎<h1>💎 Mystic Gem Mine</h1>
-‎
-‎<p>Choose your miner:</p>
-‎
-‎<button onclick="buyMiner('Diamond',5)">Diamond – 5 WLD</button><br><br>
-‎<button onclick="buyMiner('Ruby',10)">Ruby – 10 WLD</button><br><br>
-‎<button onclick="buyMiner('Emerald',15)">Emerald – 15 WLD</button><br><br>
-‎<button onclick="buyMiner('Opal',20)">Opal – 20 WLD</button>
-‎
-‎<h2>My Miner: <span id="miner">None</span></h2>
-‎<h2>Gems: <span id="gems">0</span></h2>
-‎
-‎<button onclick="mine()">⛏ Mine (Click for instant gems)</button><br><br>
-‎<button onclick="swap()">🔄 Swap Gems to WLD</button>
-‎
-‎<script>
-‎let miner = "None";
-‎let gems = 0;
-‎
-‎// Mining power per miner
-‎const miningPower = {
-‎  'Diamond': 25,
-‎  'Ruby': 10,
-‎  'Emerald': 40,
-‎  'Opal': 60
-‎};
-‎
-‎function buyMiner(name, cost){
-‎  miner = name;
-‎  document.getElementById("miner").innerText = name;
-‎  alert("You bought " + name + " miner for " + cost + " WLD");
-‎}
-‎
-‎// Instant click mining
-‎function mine(){
-‎  if(miner=="None"){
-‎    alert("Buy a miner first!");
-‎    return;
-‎  }
-‎  gems += miningPower[miner]; 
-‎  document.getElementById("gems").innerText = gems;
-‎}
-‎
-‎// Swap demo
-‎function swap(){
-‎  if(gems < 100){
-‎    alert("Need at least 100 gems to swap!");
-‎    return;
-‎  }
-‎  gems -= 100;
-‎  document.getElementById("gems").innerText = gems;
-‎  alert("Swapped 100 gems to 1 WLD (demo)");
-‎}
-‎
-‎// Auto-mining per hour (idle mining)
-‎setInterval(() => {
-‎  if(miner !== "None"){
-‎    gems += miningPower[miner]; // gems earned automatically
-‎    document.getElementById("gems").innerText = gems;
-‎  }
-‎}, 3600000); // every 1 hour
-‎</script>
-‎
-‎</body>
-‎</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mystic Gem Mine</title>
+</head>
+<body style="font-family:Arial; text-align:center; background:#111; color:white;">
+
+<h1>💎 Mystic Gem Mine</h1>
+
+<p>Choose your miner:</p>
+
+<button onclick="buyMiner('Diamond',5)">Diamond – 5 WLD</button><br><br>
+<button onclick="buyMiner('Ruby',10)">Ruby – 10 WLD</button><br><br>
+<button onclick="buyMiner('Emerald',15)">Emerald – 15 WLD</button><br><br>
+<button onclick="buyMiner('Opal',20)">Opal – 20 WLD</button>
+
+<h2>My Miner: <span id="miner">None</span></h2>
+<h2>Gems: <span id="gems">0</span></h2>
+
+<button onclick="mine()">⛏ Mine</button><br><br>
+<button onclick="swap()">🔄 Swap Gems to WLD</button>
+
+<script>
+let miner = "None";
+let gems = 0;
+
+const miningPower = {
+  Diamond: 25,
+  Ruby: 10,
+  Emerald: 40,
+  Opal: 60
+};
+
+function buyMiner(name, cost){
+  miner = name;
+  document.getElementById("miner").innerText = name;
+  alert("You bought " + name + " miner for " + cost + " WLD");
+}
+
+function mine(){
+  if(miner === "None"){
+    alert("Buy a miner first!");
+    return;
+  }
+  gems += miningPower[miner];
+  document.getElementById("gems").innerText = gems;
+}
+
+function swap(){
+  if(gems < 100){
+    alert("Need at least 100 gems to swap!");
+    return;
+  }
+  gems -= 100;
+  document.getElementById("gems").innerText = gems;
+  alert("Swapped 100 gems to 1 WLD (demo)");
+}
+
+// auto mine every 1 minute (test)
+setInterval(() => {
+  if(miner !== "None"){
+    gems += miningPower[miner];
+    document.getElementById("gems").innerText = gems;
+  }
+}, 60000);
+</script>
+
+</body>
+</html>
